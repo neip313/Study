@@ -1,4 +1,4 @@
-# Study
+# my Study
 
 - PYTHON
   + 점프 투 파이썬(Jump To Python)_ 박응용
