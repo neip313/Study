@@ -1,4 +1,4 @@
-# my Study
+# My Study
 
 - PYTHON
   + 점프 투 파이썬(Jump To Python)_ 박응용
@@ -14,6 +14,9 @@
   
 - SQL
   + 하루 10분 SQL_ 한상일
+  
+- Big Query
+  + 구글 빅쿼리 완벽가이드(Google BigQuery The Definitive Guide)_ 빌리아파 락쉬마난 외 1명
 
 - 포스텍(Postech) 청년 AI·Big Data 아카데미 온라인 기초과정 (MOOC)
   + 데이터사이언스를 위한 통계학입문Ⅰ_ 이혜선 교수
