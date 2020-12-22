@@ -1,0 +1,133 @@
+---
+title: "lec15_3_pls.r"
+author: "p_new_h"
+date: '2020 12 22 '
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+# lec15_3_pls.r
+# PLS(Partial Least Square)
+# 최소자승회귀법
+
+- 주성분분석의 component와 **최소자승회귀법의 component**의 비교 
+  + PLS는 공정변수들의 변동을 설명하는 벡터 t를 구하는데 X의 정보만을 이용하는 것이 아니라 타겟변수 **y의 정보**를 동시에 고려 
+  
+```{r}
+# install package for Partial Least Square 
+# install.packages('pls')
+library(pls)
+```
+
+
+```{r}
+# set working directory
+setwd("D:/tempstore/moocr/wk15")
+```
+
+```{r}
+# example PLS with gasoline data
+data(gasoline)
+help("gasoline")
+
+attach(gasoline)
+```
+
+
+
+```{r}
+# descriptive statistics
+par(mfrow=c(1,1))
+hist(octane, col=3)
+```
+```{r}
+summary(octane)
+```
+
+
+
+```{r}
+# pls function
+help(plsr)
+
+```
+
+```{r}
+# train and test set
+gasTrain <- gasoline[1:50, ]
+gasTest <- gasoline[51:60, ]
+```
+
+
+```{r}
+# 1.check how many principal components
+ga.pca<-prcomp(gasoline$NIR,center=T,scale.=F)
+ga.pca
+summary(ga.pca)
+plot(ga.pca,type="l")
+```
+
+```{r}
+# pls model by training set (find LV by leave-one-out) 
+# 1. start with 10 component PLS model
+gas1 <- plsr(octane ~ NIR, ncomp = 10, data = gasTrain, validation = "LOO")
+
+summary(gas1)
+```
+
+```{r}
+# 2. to choose the number of components
+plot(RMSEP(gas1), legendpos = "topright", pch=46, cex=1.0, main="Cross-validation for # of LV")
+# for gasoline data, # of LV=2
+```
+
+
+```{r}
+# 3. Display the PLS model with LV=2
+# scatterplot with true and predicted
+plot(gas1, ncomp = 2, asp = 1, line = TRUE, cex=1.5,main="Measured vs Predicted", xlab="Measured" )
+```
+
+```{r}
+# Check explained variances proportion for X
+explvar(gas1)
+```
+
+```{r}
+# 4. predicted Y for test data
+ypred<-predict(gas1, ncomp = 2, newdata = gasTest)
+
+y<-gasoline$octane[51:60]
+```
+
+```{r}
+# check : RMSEP for test data
+sqrt((sum(y-ypred)^2)/10)
+```
+
+```{r}
+# 5. compare with the one from #4 : RMSEP for test data
+RMSEP(gas1, newdata = gasTest)
+```
+
+```{r}
+# output of y and predicted y
+out1<-cbind(y, ypred)
+```
+
+```{r}
+# data exporting
+write.csv(out1,file="out1.csv", row.names = FALSE)
+```
+
+
+
+
+
+
+
+
+
+
