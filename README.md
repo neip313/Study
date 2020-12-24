@@ -2,7 +2,7 @@
 
 - PYTHON
   + 점프 투 파이썬(Jump To Python)_ 박응용
-  + 파이썬 알고리즘 인터뷰(Python Algorithm Interwiew)_ 박상길
+  + 파이썬 알고리즘 인터뷰(Python Algorithm Interiew)_ 박상길
   + 파이썬 머신러닝 완벽가이드(Python Machine Learning Perfect Guide)_ 권철민 
   
 - NLP
@@ -18,7 +18,7 @@
 - Big Query
   + 구글 빅쿼리 완벽가이드(Google BigQuery The Definitive Guide)_ 빌리아파 락쉬마난 외 1명
   
-- wep_crawling  
+- Wep_Crawling  
 
 - 포스텍(Postech) 청년 AI·Big Data 아카데미 온라인 기초과정 (MOOC)
   + 데이터사이언스를 위한 통계학입문Ⅰ_ 이혜선 교수
