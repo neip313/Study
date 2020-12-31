@@ -1,4 +1,4 @@
 # Big_Query
 
-![](/image/book_image.jpg)
+![](Big_Query/image/book_image.jpg)
   
