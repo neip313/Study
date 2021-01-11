@@ -1,4 +1,4 @@
-# Big_Query
+# Google_Big_Query_Perpect_Guide
 
 ![book](image/book_image.jpg)
 
