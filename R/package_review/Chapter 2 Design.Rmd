@@ -1,0 +1,48 @@
+---
+title: "Chapter 2 Design"
+author: "p_new_h"
+date: '2021 2 9 '
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Chapter 2 Design
+## Table parts
+플렉스테이블 객체는 세 부분으로 구성 
+- 헤더 : 기본적으로 data.frame의 이름을 포함하는 헤더 행은 하나만 있다. 
+- 본문 : body 부분은 data.frame의 데이터를 포함 
+- 바닥글 : 바닥글 부분은 기본적으로 구현되지 않지만 캔에는 각주 또는 내용이 들어 있다. 
+```{r}
+ft <- flextable(head(airquality))
+ft
+```
+부분은 새로운 라인으로 증강할 수 있다. 
+```{r}
+ft <- add_header_row(ft, values = c("air quality", "time"), colwidths = c(4, 2))
+ft <- add_footer_lines(ft, "hello note")
+ft
+```
+
+## 2.2 key columns
+- col_keys 기능으로 플렉스테이블에 표시할 변수를 설정할 수 있다. 
+```{r}
+myft <- flextable(
+  data = head(airquality),
+  col_keys = c("Ozone", "Solar.R", "Wind", "Temp", "Month", "Day"))
+
+myft
+```
+- col_keys 데이터 집합에 존재하지 않는 변수가 있으면 빈 열로 간주하여 구분자로 사용될 수 있다. 
+```{r}
+myft <- flextable(
+  data = head(airquality),
+  col_keys = c("Ozone", "Solar.R", "col1", "Month", "Day"))
+myft
+```
+## 2.3  Cell content
+- 셀의 표시된 내용은 쉽게 업데이트 될 수 있다. 
+- 복합 콘텐츠(즉, 여러 조각으로 구성)를 만들 수도 있다. 
+- 셀은 텍스트의 한 단락으로 만들어진다. 단락 다른 형식의 텍스트 청크를 여러 개 포함할 수 있다. 
