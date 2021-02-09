@@ -1,0 +1,21 @@
+---
+title: "R Shiny"
+author: "p_new_h"
+date: '2021 2 9 '
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# r shiny 맛보기
+```{r}
+install.packages("shiny")
+library(shiny)
+runExample("01_hello")
+runExample("02_text")
+runExample("03_reactivity")
+runExample("04_mpg")
+```
+
