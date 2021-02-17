@@ -1,5 +1,5 @@
 # lec2_4.r : loop, for, while
-
+# 간단한 함수 생성 
 # creat a function and loop 
 
 # create a simple function
@@ -25,7 +25,7 @@ rootdif(20,10)
 
 # to see the function "round"
 round
-
+# 소수점 자리를 조정 
 # round off the decimal point
 round(5.14846)
 round(5.14846, 2)
@@ -49,7 +49,8 @@ for(i in 1:10){
   }
   print(i)
 }
-
+# 1부터 10까지의 숫자를 반복 
+# 3으로 나눴을 때 나머지가 1인 경우 next() -> 현재 숫자에서 다음 숫자로 넘어감 
 
 # for loop example2
 # stop loop after i>5
@@ -68,4 +69,4 @@ y=0
 while(y <5){ print( y<-y+1) }
 
 
-
+rootdif(100, 25)
