@@ -1,0 +1,222 @@
+---
+title: "ggplot2을 활용한 고급 시각화"
+author: "p_new_h"
+date: '2021 2 24 '
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# ggplot2 시연 
+
+```{r}
+library(ggplot2)
+library(readr)
+install.packages('readxl')
+library(readxl)
+cities <- read_excel("minard.cities.xlsx")
+troops <- read_excel("minard.troops.xlsx")
+temps <- read_excel("minard.temps.xlsx")
+```
+```{r}
+str(cities)
+#==============
+str(troops)
+#==============
+str(temps)
+#==============
+```
+```{r}
+ggplot(data = troops, aes(x = long, y=lat)) + geom_path(aes(group=group, color= direction, size = survivors), lineend = "round") + 
+  scale_size(range = c(0.5, 15)) +
+  scale_color_manual(values = c("#DFC17E", "#252523")) +
+  xlab("") +
+  ylab("") + 
+  guides(color=F, size=F) + 
+  geom_text(data = cities, aes(x =long, y= lat, label = city))
+
+ggplot(temps, aes(x = long, y = temp)) + geom_path() + geom_point() + geom_text(aes(label = date),
+                                                                                vjust=2, col="red")
+
+```
+# ggplot2 해부
+
+```{r}
+df <- read.csv("data2_sampled.csv")
+str(df)
+```
+
+```{r}
+df$explicit <- factor(df$explicit)
+df$mode <- factor(df$mode)
+df$artists <- factor(df$artists)
+df$id <- factor(df$id)
+df$name <- factor(df$name)
+df$release_date <- factor(df$release_date)
+
+str(df)
+```
+```{r}
+library(ggplot2)
+```
+```{r}
+ggplot(data = df, aes(x=year, y= popularity, col=explicit, size = valence)) + geom_point(aes(alpha=loudness))
+```
+```{r}
+ggplot(data = df, aes(x=year, y= popularity)) + geom_line()+ geom_point()
+```
+
+# 1 var - numeric
+
+```{r}
+ggplot(data = df, aes(x=popularity)) + geom_histogram(bins = 60)
+```
+```{r}
+ggplot(data = df, aes(x=popularity)) + geom_density(fill="orange")
+```
+```{r}
+ggplot(data = df, aes(x=popularity)) + geom_freqpoly(col="orange")
+```
+# 1 var - factor(integer)
+```{r}
+ggplot(data = df, aes(x=explicit)) + geom_bar()
+```
+```{r}
+ggplot(data = df, aes(x=key)) + geom_bar()
+```
+```{r}
+ggplot(data = head(df, n =100), aes(x=key)) + geom_dotplot(dotsize = 0.5, stackdir = "centerwhole")
+```
+# 2 vars - factor vs numeric
+
+```{r}
+ggplot(data = df, aes(x = explicit, y = popularity)) + geom_boxplot()
+```
+
+
+```{r}
+ggplot(data = df, aes(x = explicit, y = popularity)) + geom_violin(aes(fill=explicit))
+```
+
+# 2 vars - factor vs factor
+
+```{r}
+ggplot(data = df, aes(x = explicit, y = mode)) + geom_count()
+```
+
+# 2 vars - numeric vs numeric
+
+
+```{r}
+ggplot(data = df, aes(x = year, y = popularity)) + geom_jitter(width = 0.5, height = 0.5)
+```
+```{r}
+ggplot(data = df, aes(x = year, y = popularity)) + geom_density_2d()
+```
+
+```{r}
+ggplot(data = df, aes(x = year, y = popularity)) + geom_bin2d()
+```
+
+```{r}
+ggplot(data = df, aes(x = year, y = popularity)) + geom_smooth(method = "lm", col = "red", se =F) + geom_point()
+```
+
+# ggplot2 해부2 
+
+## statistics
+```{r}
+ggplot(data = df, aes(x = year, y = popularity)) + stat_summary()
+```
+```{r}
+ggplot(data = df, aes(x = year, y = popularity)) + stat_summary(geom="bar", fun=max)
+```
+```{r}
+ggplot(data = df, aes(x = year, y = popularity)) + geom_point() + facet_wrap(~key, nrow = 4)
+```
+```{r}
+ggplot(data = df, aes(x = year, y = popularity)) + geom_point() + facet_grid(explicit~key)
+```
+## scale
+```{r}
+ggplot(data = df, aes(x = year, y = popularity, col = explicit, size = valence)) + geom_point() + scale_color_manual(values = c("orange", "dark green")) + scale_size_continuous(range=c(1,2))
+```
+
+## coordinate
+```{r}
+ggplot(data = df, aes(x = year, y = popularity)) + geom_point() + coord_polar()
+```
+```{r}
+ggplot(data = df, aes(y=1, fill=explicit)) + geom_bar() + coord_polar()
+```
+
+## etc
+```{r}
+ggplot(data = df, aes(x = year, y = popularity)) + geom_point() + xlab("YEAR") + ylab("POP") + ggtitle("SPOTIFY SONGS = Popularity over Year") + ylim(c(0, 100)) + theme_void()
+```
+### qplot 빠르게 알아서 그려줌 
+```{r}
+qplot(df$year, df$valence)
+```
+
+```{r}
+plot(df$year, df$valence)
+```
+
+# 인사이트 도출하기 
+
+```{r}
+install.packages("GGally")
+library(GGally)
+```
+## corplot
+```{r}
+Filter(is.numeric, df)
+```
+```{r}
+plot(Filter(is.numeric, df))
+```
+```{r}
+ggpairs(Filter(is.numeric, df))
+```
+
+```{r}
+str(cbind(Filter(is.numeric, df), df[,c("mode", "explicit")]))
+```
+```{r}
+ggpairs(cbind(Filter(is.numeric, df), df[,c("mode", "explicit")]))
+```
+
+
+```{r}
+df <- read.csv("data2.csv")
+str(df)
+```
+```{r}
+df$explicit <- factor(df$explicit)
+df$mode <- factor(df$mode)
+df$artists <- factor(df$artists)
+df$id <- factor(df$id)
+df$name <- factor(df$name)
+df$release_date <- factor(df$release_date)
+
+str(df)
+```
+```{r}
+df1 <- subset(df, select = -c(X, X.1, X.2, X.3, X.4, X.5, X.6, X.7, X.8, X.9, X.10, X.11) )
+```
+
+
+
+```{r}
+ggplot(data = df1, aes(x = year, y=popularity)) + geom_point(alpha=0.01)
+```
+```{r}
+ggplot(data = df1, aes(x = loudness, y=popularity)) + geom_point(alpha=0.01)
+```
+
+
+
+

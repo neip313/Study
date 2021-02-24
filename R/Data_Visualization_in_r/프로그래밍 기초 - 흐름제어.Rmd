@@ -1,0 +1,120 @@
+---
+title: "프로그래밍 기초 - 흐름제어"
+author: "p_new_h"
+date: '2021 2 23 '
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+# if 조건문 
+```r
+if(조건){
+  조건이 TRUE일 경후 실행할 코드
+}else {
+  조건이 FALSE일 경우 실행할 코드
+}
+```
+
+```{r}
+companyDinner <- TRUE
+if(companyDinner == TRUE){
+print("R공부를 하지 않는다")
+}else {
+  print("R공부를 한다")
+}
+```
+
+# while 반복문 
+
+```r
+while (condition) {
+  #조건이 반복되는 동안에 반복될 코드 
+}
+```
+
+```{r}
+money <- 5300
+icecream <- 0
+
+while(money>=500){
+  money<- money - 500
+  icecream<- icecream +1
+  print("아이스크림을 손에 넣었다!")
+}
+
+money
+icecream
+```
+
+# while 문 예제 2 
+# while 문에서 탈출하기 
+
+```{r}
+money <- 5300
+icecream <- 0
+
+while(money>=500){
+  if(money < 1500){
+    print("버스비를 아껴야겠다...")
+    break
+  }
+  money<- money - 500
+  icecream<- icecream +1
+  print("아이스크림을 손에 넣었다!")
+}
+
+money
+icecream
+```
+# for문 
+```r
+for(x in y){
+  # 반복할 코드
+}
+```
+
+```{r}
+students <- c("홍길동","홍길순", "철수", "영희")
+for(students in students){
+  print(paste(students, "출석 불렀습니다"))
+}
+```
+
+# 반복문과 조건문 
+`
+# while 문을 쓰면 안되는 이유 
+
+```{r}
+index <- 1 
+while (index <= 100) {
+  print(index)
+  index <- index + 1
+}
+```
+
+```{r}
+index <- 1 
+while (index <= 100) {
+  print(index)
+  index <- index - 1
+}
+```
+
+while문은 무한루프에 빠질 우려가 있어 for문을 사용하는 것이 좋다. 
+
+```{r}
+for (i in -11:10) {
+  print(i)
+}
+```
+
+
+
+
+
+
+
+
+

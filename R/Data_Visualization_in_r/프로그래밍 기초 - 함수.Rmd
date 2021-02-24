@@ -1,0 +1,127 @@
+---
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# 함수란 
+
+input 이 있고 output이 있는 식 
+
+# 함수 만들기 
+
+```
+내가 만들고 싶은 함수 이름 <- function(인풋 변수들){
+  함수의 내용 
+  ruturn(아웃풋)
+}
+```
+
+```{r}
+myfunction <- function(x, y){
+  result <- x + y
+  return(result)
+}
+
+myfunction(5, 6)
+```
+
+# 계산기 함수 만들어보기 
+
+```r
+cal <- function(a, b, f){
+  # 함수내용
+  return(output)
+}
+```
+
+```{r}
+cal1 <- function(x, y){
+  z <- x + y
+  return(z)
+}
+
+cal1(4, 7)
+```
+
+```{r}
+cal2 <- function(x, y){
+  z <- x - y
+  return(z)
+}
+
+cal2(1, 2)
+```
+```{r}
+cal3 <- function(x, y){
+  z <- x * y
+  return(z)
+}
+
+cal3(5, 7)
+```
+```{r}
+cal4 <- function(x, y){
+  z <- x / y
+  return(z)
+}
+
+cal4(10, 5)
+```
+
+# 짜여진 코드를 함수화 
+```{r}
+df <- read.csv("data.csv")
+df <- head(df, n = 10000)
+str(df)
+```
+
+
+```{r}
+conbertedValues <- c()
+for(value in df$name){
+  if(grepl("Charming", value)){
+    newValue = "charming"
+  }else if(grepl("Amazing", value)){
+    newValue = "amazing"
+  }else if(grepl("Stunning", value)){
+    newValue = "Stunning"  
+  }else if(grepl("OK", value)){
+    newValue = "OK" 
+  }else{
+  newValue = "Other"
+  }
+  convertedValues <- c(conbertedValues, newValue)
+}
+
+convertedValues
+```
+```{r}
+conbertedValues <- function(vec){
+  conbertedValues <- c()
+for(value in vec){
+  if(grepl("Charming", value)){
+    newValue = "charming"
+  }else if(grepl("Amazing", value)){
+    newValue = "amazing"
+  }else if(grepl("Stunning", value)){
+    newValue = "Stunning"  
+  }else if(grepl("OK", value)){
+    newValue = "OK" 
+  }else{
+  newValue = "Other"
+  }
+  convertedValues <- c(conbertedValues, newValue)
+}
+ return(conbertedValues)
+}
+
+df$newVar <- conbertedValues(df$name)
+df$newVar
+```
+
+
+
+
+
