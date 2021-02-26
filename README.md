@@ -11,9 +11,12 @@
   
 - R 
   + R을 활용한 데이터 과학(R for Data Science)_ 헤들리위컴 외 1명 
+  + [탈잉] R로 배우는 데이터 시각화 기초 _ 션 튜텨
   
 - SQL
   + 하루 10분 SQL_ 한상일
+  + SQL 첫걸음 _ 아사이 아츠시
+  + SQLD 개발자 이론서 _ 
   
 - Big Query
   + 구글 빅쿼리 완벽가이드(Google BigQuery The Definitive Guide)_ 빌리아파 락쉬마난 외 1명
