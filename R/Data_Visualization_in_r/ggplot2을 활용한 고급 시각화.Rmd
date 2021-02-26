@@ -168,7 +168,6 @@ plot(df$year, df$valence)
 # 인사이트 도출하기 
 
 ```{r}
-install.packages("GGally")
 library(GGally)
 ```
 ## corplot
@@ -191,7 +190,7 @@ ggpairs(cbind(Filter(is.numeric, df), df[,c("mode", "explicit")]))
 
 
 ```{r}
-df <- read.csv("data2.csv")
+df <- read.csv("data2_sampled.csv")
 str(df)
 ```
 ```{r}
@@ -211,11 +210,83 @@ df1 <- subset(df, select = -c(X, X.1, X.2, X.3, X.4, X.5, X.6, X.7, X.8, X.9, X.
 
 
 ```{r}
-ggplot(data = df1, aes(x = year, y=popularity)) + geom_point(alpha=0.01)
+ggplot(data = df, aes(x = year, y=popularity)) + geom_point(alpha=1)
 ```
 ```{r}
-ggplot(data = df1, aes(x = loudness, y=popularity)) + geom_point(alpha=0.01)
+ggplot(data = df, aes(x = acousticness, y=popularity)) + geom_point(alpha=0.01) + xlim(c(-20, 0)) + geom_smooth()
 ```
+```r
+ggplot(data = df1, aes(x = acousticness, y=popularity)) + geom_point() + ylim(c(1, 100)) + geom_smooth()
+```
+```r
+ggplot(data=df[df$year==2020,], aes(x=acousticness, y=popularity)) + geom_point() + ylim(c(1, 100)) + geom_smooth() + facet_wrap(~year)
+```
+# 
+```{r}
+ggplot(data = df, aes(x=explicit, y= popularity)) + geom_violin()
+```
+
+```{r}
+df$year10 <- factor(floor(df$year/10)*10)
+ggplot(data=df, aes(x=explicit, y = popularity)) + geom_violin() + facet_wrap(~year10)
+```
+
+```{r}
+ggplot(data = df, aes(x=popularity)) + geom_density(aes(fill=explicit), alpha=0.5) + facet_wrap(~year10) + ylim(0, 0.15)
+```
+#animation
+
+```r
+install.packages("gganimate")
+install.packages("gifski")
+install.packages("av")
+install.packages("png")
+install.packages("unit", type = "binary")
+install.packages("transformr")
+
+```
+```{r}
+library(gganimate)
+ggplot(data = df, aes(x=popularity)) + geom_density(aes(fill=explicit), alpha=0.5) + ylim(0, 0.15) + transition_states(year10)
+```
+
+```{r}
+library(gganimate)
+ggplot(data = df, aes(x=popularity)) + geom_density(aes(fill=explicit), alpha=0.5) + ylim(0, 0.15) + transition_states(year10) + ggtitle("Popularity of Songs with Explicit Cotent in {closest_state}s")
+```
+```{r}
+anim_save("animation.gif")
+```
+# publish
+```{r}
+df$explicit <- factor(df$explicit)
+df$mode <- factor(df$mode)
+```
+
+# 1
+```{r}
+ggplot(data = df, aes(x= loudness, y=popularity))+ geom_point() +theme_linedraw()+facet_wrap(~explicit)
+```
+```{r}
+ggplot(data = df, aes(x=explicit, y = popularity)) + geom_violin() + theme_void()
+```
+```{r}
+png("plot.png", width=1080, height = 800)
+ggplot(data = df, aes(x=explicit, y = popularity)) + geom_violin() + theme_void()
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
