@@ -16,7 +16,7 @@
 - SQL
   + 하루 10분 SQL_ 한상일
   + SQL 첫걸음 _ 아사이 아츠시
-  + SQLD 개발자 이론서 _ 
+  + SQLD 개발자 이론서 _ 임호진 외 3명 
   
 - Big Query
   + 구글 빅쿼리 완벽가이드(Google BigQuery The Definitive Guide)_ 빌리아파 락쉬마난 외 1명
