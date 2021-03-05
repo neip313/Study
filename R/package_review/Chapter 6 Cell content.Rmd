@@ -1,0 +1,35 @@
+---
+title: "Chapter 6 Cell content"
+author: "p_new_h"
+date: '2021 3 2 '
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Chapter 6 Cell content
+## 6.1 Simple formatting of cell content
+- colformat_num() and colformat_double() with arguments digits and big.mark: let you format columns of type double.
+- colformat_int() with arguments big.mark: let you format columns of type integer.
+- colformat_char(): let you format columns of type character.
+- colformat_lgl(): let you format columns of type logical.
+- colformat_image(): let you format image paths as images.
+- colformat_date() and colformat_datetime(): let you format columns of type date and datetime (POSIX).
+
+```{r}
+head(Titanic)
+```
+
+
+```{r}
+flextable(mtcars) %>% 
+  colformat_num(
+    big.mark = " ", decimal.mark = ",",
+    na_str = "na") %>% 
+  colformat_int(big.mark = " ") %>% 
+  colformat_char(j = "eye_color", prefix = "color: ") %>% 
+  colformat_date(fmt_date = "%d/%m/%Y")
+```
+

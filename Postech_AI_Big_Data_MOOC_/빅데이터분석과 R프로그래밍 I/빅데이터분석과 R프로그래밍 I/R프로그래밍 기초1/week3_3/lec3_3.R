@@ -1,19 +1,37 @@
 # lec3_3.r
-# Data handling
+# Data handling using dplyr 
 # Data analysis with autompg.txt
 
 # set working directory
 # change working directory 
 setwd("D:/tempstore/moocr")
-
+library(dplyr)
 # 2.Read txt file with variable name
 # http://archive.ics.uci.edu/ml/datasets/Auto+MPG
 
 # 1. Data reading in R
 car<-read.table(file="autompg.txt", na=" ", header=TRUE)
 
-#car<-read.csv(file="autompg.csv")
+# 1. mpg(연비 : 연속형 변수)
+# 2. cylinders :(실린더 : 정수값)
+# 3. displacement : (배기량 : 연속형변수)
+# 4. horsepower : (마력 : 연속형변수)
+# 5. weight : (무게 : 연속형변수)
+# 6. acceleration : (가속 : 연속형변수)
+# 7. year : (모델연도 : 정수값)
+# 8. origin : (정수값)
+# 9. car name string : (차종류 이름)
 
+# dplyr 패키지의 주요 함수 
+# select : 일부변수를 선택 
+# filter : 필터링 기능(조건에 맞는 데이터 추출)
+# mutate : 새로운 변수 생성 
+# group_by : 그룹별 통계량을 얻을 때 
+# summarize : 요약 통계량 (mean, min, max, sum)
+# arrange : 행 정렬시 사용 
+
+#car<-read.csv(file="autompg.csv")
+attach(car)
 head(car)
 dim(car)
 
