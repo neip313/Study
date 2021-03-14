@@ -1,5 +1,5 @@
 # SQL 첫걸음
-![book](image/book.jpg)  
+![book](image/book.JPG)  
 
 # 목차
 1장 데이터베이스와 SQL
